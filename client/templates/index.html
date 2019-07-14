@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../CSS/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins|Raleway" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <title>Cryptonite</title>
+</head>
+
+<body>
+
+    <!-- <header> -->
+    <div class="parallax">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <img src="../CSS/img/newlogo.png" id="logo">
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <div class="container-fluid" id="main">
+
+            <div class="row">
+                <div class="navbar">
+
+                    <div class="col-sm-4">
+                        <span class="nav-item"><a class="link" href=""><i class="fas fa-home nav-icon"></i>Home</a></span>
+                    </div>
+                    <div class="col-sm-4">
+                        <span class="nav-item"><a class="link" id="graphs" href="#graphs"><i class="fas fa-chart-line nav-icon"></i>Live
+                                Reports</a></span>
+                
+                    </div>
+        
+                    <div class="col-sm-4">
+                        <span class="nav-item"><a class="link" href="#about" id="about"><i class="fas fa-coins nav-icon"></i>About</a></span>
+                    </div>
+                </div>
+
+            </div>
+            <br>
+            <br>
+
+            <div id="sDiv">
+                <input type="text" id="searchInp" placeholder="Search for Coin">
+                <span id="searchIcon"><i class="fas fa-search fa-3x"></i></span>
+                <br>
+                <small id="err"></small>
+            </div>
+
+
+
+            <div id="coinDisplay">
+
+            </div>
+            <div id="tempDisplay" style="display:none">
+
+            </div>
+
+            <div id="graphTemp" style="display:none">
+                <h1 class="head">Welcome to Live Reports</h1>
+                <br>
+                <div id="chartContainer" style="height: 350px; width: 100%;"></div>
+            </div>
+
+            <div id="aboutTemp" style="display:none">
+                    <h1 class="head">About</h1>
+                    <img id="myImg" src="../CSS/img/aya.jpeg">
+                    <br>
+                    <br>
+                    <p id="mydesc">This is an amazing project about coins made by Aya Bochman, 
+                        one of the greatest web developers in the world. It took her 4239842 hours to complete.</p>
+                    <br>
+              
+                </div>
+
+
+        </div>
+        <div class="parallax2">
+
+        </div>
+
+
+
+        <script src="../JS/jq.js"></script>
+        <script src="../canvas/canvasjs.min.js"></script>
+        <script src="../canvas/jquery.canvasjs.min.js"></script>
+  
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+        <script src="../../api/config.js"></script>
+        <script src="../../api/routers.js"></script>
+        <script src="../../api/service.js"></script>
+        <script src="../JS/controller.js"></script>
+
+        <script src="../../api/graphs.js"></script>
+
+
+
+        <!-- template -->
+
+        <div name="template" style="display: none;" class="card col-sm-3" id="temp">
+
+
+            <label class="switch">
+                <input type="checkbox" class="checkbox">
+                <span class="slider round"></span>
+            </label>
+            <div class="card-header" id="coinCode"></div>
+            <div class="card-body">
+
+                <div class="main-description" id="coinName"></div>
+                <br>
+                <button id="collapser" class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseId"
+                    aria-expanded="false" aria-controls="collapseExample" onclick="getInfo(event)">
+                    More Info</button>
+                <div style="display: none;" class="loader"></div>
+                <div class="collapse" id="collapseId">
+                    <div id="collapseResult" class="card-body">
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <!-- MODAL -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <h3 class="modal-title">You can only track 5 reports</h4> 
+                    </div>
+                    <h2>Change selection?</h2>
+                    <div class="modal-body">
+
+                 
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="close">Close</button>
+                        <button type="button" class="btn btn-success" id="save">Save changes</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+
+</body>
+
+
+
+</html>
